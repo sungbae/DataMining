@@ -11,7 +11,7 @@ import math
 import random
 import matplotlib.pyplot as plt
 
-class dataSet:
+class DataSet:
     """
     Class to store the MAGIC Gamma Telescope Data Set
     """
@@ -19,7 +19,7 @@ class dataSet:
         with open (location, "r") as myfile:
             self.readData=myfile.readlines();
 
-def quickSort(lst):
+def quicksort(lst):
     n = len(lst)
     if (n < 2):
         return lst
@@ -38,9 +38,9 @@ def quickSort(lst):
         else:
             lst_right.append(lst[i])
             i = i + 1
-    return quickSort(lst_left) + lst_mid + quickSort(lst_right)
+    return quicksort(lst_left) + lst_mid + quicksort(lst_right)
 
-def columnToRow(data, ithAttribute):
+def column_to_row(data, ithAttribute):
     rows = (row.strip().split(',') for row in data)
     data_list = [float(i) for i in zip(*rows)[ithAttribute-1]]
     return data_list
@@ -94,8 +94,8 @@ def calculate(data, ithAttribute):
     Objective of the function is to calculate:  N (number of objects), min, max, mean, standard deviation, Q1, median, Q3, IQR
     """
     noOfObjects , minValue , maxValue , mean , standardDeviation , q1 , median , q3 ,iqr = [0,"-inf","inf",0,0,0,0,0,0]
-    data_list = columnToRow(data, ithAttribute)
-    data_list_sorted = quickSort(data_list)
+    data_list = column_to_row(data, ithAttribute)
+    data_list_sorted = quicksort(data_list)
     noOfObjects = len(data_list_sorted)
     total_value = 0
     for i in range(0, noOfObjects):
@@ -112,8 +112,8 @@ def calculate(data, ithAttribute):
     return noOfObjects , minValue , maxValue, mean, standardDeviation , q1 , median , q3 , iqr
 
 def graph(data):
-    attribute4 = columnToRow(data, 4)
-    attribute5 = columnToRow(data, 5)
+    attribute4 = column_to_row(data, 4)
+    attribute5 = column_to_row(data, 5)
     plt.plot(attribute4,attribute5, 'ro')
     plt.xlabel('4th attribute (fConc)')
     plt.ylabel('5th attribute (fConc1)')
@@ -131,6 +131,6 @@ if __name__ == "__main__":
                             default="magic04.data.txt", 
                             required=False)
     args = parser.parse_args()
-    data = dataSet(args.data)
+    data = DataSet(args.data)
     print ','.join(map(str,calculate(data.readData,args.i)))
     graph(data.readData)
