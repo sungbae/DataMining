@@ -15,4 +15,10 @@ Stock quotes analysis. Go to http://www.nasdaq.com/quotes/, enter a symbol in st
 
 1. Given a single filename, attribute type, and normalization method, compute the corresponding normalized attributed values. Using range [0, 1.0] for min-max normalization.  Output two values per line: the original attributed value and the normalized attribute value, separated by the < tab > key. 
 
+   E.g., python DMPythonHW2.py -f1 FB.csv -a1 volume -n min_max
+
 2. Given two filenames, their corresponding attribute types, compute the correlation coefficient between the two attributes types in the two files. Output a single value, which is the correlation coefficient. 
+
+   E.g., python DMPythonHW2.py -f1 FB.csv -a1 high -f2 FB.csv -a2 low 
+   
+   E.g., python DMPythonHW2.py -f1 FB.csv -a1 open -f2 AAPL.csv -a2 open 
